@@ -49,4 +49,33 @@ public class RequestVolley {
         }
     }
 
+    //////// ----- METODOS DE AUTENTICACION -----
+
+    /**
+     * Autenticación basica para los headers de la peticón
+     *
+     * @param user Usuario a autenticar
+     * @param pass Contraseña del usuario
+     */
+    public void basicAuth(String user, String pass) {
+        String credentials = user + ":" + pass;
+        Log.e("CREDENCIALS-----", credentials);
+        String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        headers.clear();
+        headers.put("Authorization", auth);
+        Log.e("Authorization-----", auth);
+    }
+
+    /**
+     * Autenticación con Token para los headers de la peticón
+     *
+     * @param token Token obtenido con la autenticación del usuario
+     */
+    public void tokenAuth(String token) {
+        headers.clear();
+        headers.put("Content-Type", "application/json");
+        headers.put("Authorization", "Bearer " + token);
+        Log.e("Authorization-----", "Bearer " + token);
+    }
+
 }
